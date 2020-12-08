@@ -1,14 +1,7 @@
 /**
- * Configuration file for SnowpackJS.
- * Snowpack is used for development purposes only. This config file will only
- * touch development-related configurations.
- * Webpack is used to create a production-ready bundle. All built/exported files
- * are completed with Webpack.
+ * Configuration file for Snowpack.
+ * Snowpack uses the webpack plugin for bundling the built site for use in production.
  */
-
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const path = require("path");
-
 module.exports = {
   mount: {
     public: "/",
@@ -24,12 +17,6 @@ module.exports = {
         sourceMap: true,
         failOnWarnings: false,
         extendConfig: (config) => {
-          config.output = { path: path.resolve(__dirname, "GTSucks") }
-          config.plugins.push(
-            new HtmlWebpackPlugin({
-              template: path.resolve(__dirname, "public", "index.html")
-            })
-          );
           return config;
         }
       },
