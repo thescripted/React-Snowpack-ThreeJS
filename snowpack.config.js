@@ -6,6 +6,9 @@
  * are completed with Webpack.
  */
 
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
+
 module.exports = {
   mount: {
     public: "/",
@@ -13,5 +16,23 @@ module.exports = {
   },
   devOptions: {
     port: 3000
-  }
-}
+  },
+  plugins: [
+    [
+      '@snowpack/plugin-webpack',
+      {
+        sourceMap: true,
+        failOnWarnings: false,
+        extendConfig: (config) => {
+          config.output = { path: path.resolve(__dirname, "GTSucks") }
+          config.plugins.push(
+            new HtmlWebpackPlugin({
+              template: path.resolve(__dirname, "public", "index.html")
+            })
+          );
+          return config;
+        }
+      },
+    ],
+  ],
+};
